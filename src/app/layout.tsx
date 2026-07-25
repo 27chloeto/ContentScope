@@ -7,8 +7,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lumos App",
-  description: "Built with create-lumos-app",
+  title: "ContentScope",
+  description:
+    "ContentScope analyzes your skincare brand's social posts for audience fit and recommends changes before you publish.",
 };
 
 export default function RootLayout({

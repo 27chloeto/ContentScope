@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { BeforeActionAfter } from "~/components/before-action-after";
 import { SkincareIllustration } from "~/components/skincare-illustration";
 import { buttonVariants } from "~/components/ui/button-variants";
@@ -48,14 +49,25 @@ const features = [
   },
 ];
 
+function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <span className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+      <span className="size-1.5 rounded-full bg-primary" />
+      {children}
+    </span>
+  );
+}
+
 export default function Home() {
   return (
     <main className="flex flex-col">
-      <section className="mx-auto grid w-full max-w-3xl grid-cols-1 items-center gap-10 px-4 pt-24 pb-20 sm:grid-cols-[1.2fr_1fr]">
+      <section className="relative mx-auto grid w-full max-w-3xl grid-cols-1 items-center gap-10 overflow-hidden px-4 pt-24 pb-20 sm:grid-cols-[1.2fr_1fr]">
+        <div
+          aria-hidden="true"
+          className="-z-10 pointer-events-none absolute top-[-6rem] right-[-4rem] size-72 rounded-full bg-primary/10 blur-3xl"
+        />
         <div className="flex flex-col gap-6">
-          <p className="text-sm font-medium text-muted-foreground">
-            ContentScope
-          </p>
+          <Eyebrow>ContentScope</Eyebrow>
           <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
             Know if a post will land — before you publish it.
           </h1>
@@ -65,7 +77,10 @@ export default function Home() {
             post is built to resonate.
           </p>
           <div className="mt-2 flex items-center gap-3">
-            <Link href="/notes" className={cn(buttonVariants({ size: "lg" }))}>
+            <Link
+              href="/analyze"
+              className={cn(buttonVariants({ size: "lg" }))}
+            >
               Get started
             </Link>
             <a
@@ -76,16 +91,14 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <SkincareIllustration className="hidden w-full max-w-[280px] justify-self-end sm:block" />
+        <SkincareIllustration className="hidden w-full max-w-[340px] justify-self-end sm:block" />
       </section>
 
       <section
         id="how-it-works"
         className="mx-auto w-full max-w-3xl border-t border-border px-4 py-20"
       >
-        <h2 className="text-sm font-medium text-muted-foreground">
-          How it works
-        </h2>
+        <Eyebrow>How it works</Eyebrow>
         <div className="mt-8 flex flex-col">
           {steps.map((step, index) => (
             <div
@@ -110,16 +123,12 @@ export default function Home() {
       </section>
 
       <section className="mx-auto w-full max-w-3xl border-t border-border px-4 py-20">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          See it in action
-        </h2>
+        <Eyebrow>See it in action</Eyebrow>
         <BeforeActionAfter />
       </section>
 
       <section className="mx-auto w-full max-w-3xl border-t border-border px-4 py-20">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          What you get
-        </h2>
+        <Eyebrow>What you get</Eyebrow>
         <div className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2">
           {features.map((feature) => (
             <div key={feature.title} className="flex flex-col gap-1.5">
@@ -135,7 +144,7 @@ export default function Home() {
           <h2 className="max-w-md text-2xl font-semibold tracking-tight text-balance">
             Publish with confidence, not guesswork.
           </h2>
-          <Link href="/notes" className={cn(buttonVariants({ size: "lg" }))}>
+          <Link href="/analyze" className={cn(buttonVariants({ size: "lg" }))}>
             Get started
           </Link>
         </div>

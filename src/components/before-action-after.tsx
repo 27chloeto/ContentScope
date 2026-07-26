@@ -17,9 +17,7 @@ function Panel({
       className={cn("animate-fade-in-up flex flex-col gap-3", className)}
       style={style}
     >
-      <span className="text-xs font-medium text-muted-foreground">
-        {label}
-      </span>
+      <span className="text-xs font-medium text-muted-foreground">{label}</span>
       <div className="flex flex-1 flex-col gap-3 rounded-lg border border-border bg-card p-4 transition-shadow duration-300 hover:shadow-sm">
         {children}
       </div>
@@ -32,13 +30,13 @@ function Arrow({ style }: { style?: CSSProperties }) {
     <div
       className="animate-fade-in-up flex items-center justify-center text-muted-foreground"
       style={style}
-      aria-hidden="true"
     >
       <svg
         width="18"
         height="18"
         viewBox="0 0 20 20"
         fill="none"
+        aria-hidden="true"
         className="shrink-0 rotate-90 sm:rotate-0"
       >
         <path

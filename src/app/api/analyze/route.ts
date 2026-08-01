@@ -8,8 +8,21 @@ import {
   CONTENT_TYPES,
 } from "~/lib/analysis-schema";
 import { anthropic } from "~/lib/anthropic";
+import { createClient } from "~/lib/supabase/server";
 
 export async function POST(request: Request) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json(
+      { error: "You must be signed in to analyze a post." },
+      { status: 401 },
+    );
+  }
+
   const body = await request.json();
   const parsed = analysisRequestSchema.safeParse(body);
 
@@ -110,6 +123,24 @@ export async function POST(request: Request) {
       { error: "Analysis service returned an unexpected response." },
       { status: 502 },
     );
+  }
+
+  const { error: insertError } = await supabase.from("analyses").insert({
+    user_id: user.id,
+    content_type: contentType,
+    post_text: text,
+    age_group: audience.ageGroup,
+    location: audience.location,
+    target_customer: audience.targetCustomer,
+    fit_score: result.data.fitScore,
+    strengths: result.data.strengths,
+    weaknesses: result.data.weaknesses,
+    issues: result.data.issues,
+    recommendations: result.data.recommendations,
+  });
+
+  if (insertError) {
+    console.error("Failed to save analysis", insertError);
   }
 
   return NextResponse.json(result.data);

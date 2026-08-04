@@ -8,6 +8,7 @@ import {
   AGE_GROUPS,
   type AnalysisResult,
   CONTENT_TYPES,
+  PLATFORMS,
 } from "~/lib/analysis-schema";
 import { cn } from "~/lib/utils";
 
@@ -84,11 +85,15 @@ export function AnalyzeClient() {
   );
   const [location, setLocation] = useState("");
   const [targetCustomer, setTargetCustomer] = useState("");
+  const [platform, setPlatform] = useState<(typeof PLATFORMS)[number]["value"]>(
+    PLATFORMS[0].value,
+  );
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const contentTypeId = useId();
   const ageGroupId = useId();
+  const platformId = useId();
 
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
@@ -128,7 +133,7 @@ export function AnalyzeClient() {
           contentType,
           text,
           image,
-          audience: { ageGroup, location, targetCustomer },
+          audience: { ageGroup, location, targetCustomer, platform },
         }),
       });
 
@@ -254,6 +259,26 @@ export function AnalyzeClient() {
               {AGE_GROUPS.map((group) => (
                 <option key={group} value={group}>
                   {group}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor={platformId}>Target platform</Label>
+            <select
+              id={platformId}
+              value={platform}
+              onChange={(e) =>
+                setPlatform(
+                  e.target.value as (typeof PLATFORMS)[number]["value"],
+                )
+              }
+              className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            >
+              {PLATFORMS.map((p) => (
+                <option key={p.value} value={p.value}>
+                  {p.label}
                 </option>
               ))}
             </select>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BeforeActionAfter } from "~/components/before-action-after";
+import { MarketComparisonExample } from "~/components/market-comparison-example";
 import { SkincareIllustration } from "~/components/skincare-illustration";
 import { buttonVariants } from "~/components/ui/button-variants";
 import { cn } from "~/lib/utils";
@@ -8,44 +8,44 @@ import { cn } from "~/lib/utils";
 const steps = [
   {
     number: "01",
-    title: "Connect your content",
+    title: "Paste your draft",
     description:
-      "Drop in a draft post, caption, or image and tell us which platform it's headed for.",
+      "Add the caption or product description you are planning to post, choose the content type, and optionally upload the image that goes with it.",
   },
   {
     number: "02",
-    title: "Get an audience fit score",
+    title: "Say who it is for, and where",
     description:
-      "ContentScope compares the post against your brand's audience — tone, claims, ingredients, and visuals — and scores how well it lands.",
+      "Set the age group, the platform, the location you are posting into, and a short description of your target customer.",
   },
   {
     number: "03",
-    title: "Fix it before you post",
+    title: "See how it lands",
     description:
-      "Get specific, actionable edits to copy and visuals so the post resonates before it ever goes live.",
+      "Get an audience fit score out of 100, along with strengths, weaknesses, potential issues, and specific edits you can make before publishing.",
   },
 ];
 
 const features = [
   {
-    title: "Audience fit analysis",
+    title: "Audience fit score",
     description:
-      "See how a post reads to your actual followers — skin concerns, age range, and buying intent — not just generic engagement guesses.",
+      "A single score out of 100 showing how well the post matches the people you are trying to reach.",
   },
   {
-    title: "Pre-publish recommendations",
+    title: "Market aware feedback",
     description:
-      "Every post comes back with concrete suggestions: tighten the hook, reorder claims, swap a visual, adjust the CTA.",
+      "Set a location and the analysis accounts for local advertising norms, tone, directness, and language expectations, not just translation.",
   },
   {
-    title: "Ingredient & claims awareness",
+    title: "Strengths, weaknesses, and issues",
     description:
-      "Flags language that may overstate results or clash with how your audience talks about actives and routines.",
+      "A structured read on what is working, what is not, and what could create a problem once published.",
   },
   {
-    title: "Built for skincare brands",
+    title: "Specific recommended edits",
     description:
-      "Tuned on skincare social content specifically, so recommendations reflect how the category actually performs.",
+      "Concrete suggestions you can apply directly, including alternative phrasings and visual direction.",
   },
 ];
 
@@ -69,12 +69,12 @@ export default function Home() {
         <div className="flex flex-col gap-6">
           <Eyebrow>ContentScope</Eyebrow>
           <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-            Know if a post will land — before you publish it.
+            Know how your post will land, in any market.
           </h1>
           <p className="max-w-xl text-lg text-muted-foreground">
-            ContentScope analyzes your skincare brand's social posts for
-            audience fit and recommends changes before they go live, so every
-            post is built to resonate.
+            ContentScope scores a draft post against the audience and the market
+            you are targeting, then tells you exactly what to change before you
+            publish.
           </p>
           <div className="mt-2 flex items-center gap-3">
             <Link
@@ -124,7 +124,7 @@ export default function Home() {
 
       <section className="mx-auto w-full max-w-3xl border-t border-border px-4 py-20">
         <Eyebrow>See it in action</Eyebrow>
-        <BeforeActionAfter />
+        <MarketComparisonExample />
       </section>
 
       <section className="mx-auto w-full max-w-3xl border-t border-border px-4 py-20">
